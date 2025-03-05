@@ -1,0 +1,11 @@
+<script>
+async function f1() {
+	return new Promise((a_) => setTimeout(() => a_(Math.random()), 1000))
+}
+async function f2() {
+	return new Promise((a_) => setTimeout(() => a_(Math.random()), 1000))
+}
+async function calcSum() {
+	return await f1() + await f2()
+}
+</script>

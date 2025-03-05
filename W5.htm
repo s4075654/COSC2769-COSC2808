@@ -1,0 +1,54 @@
+<main>
+	<menu>
+		<div id="Home">
+			<p>a generic text</p>
+		</div>
+		<div id="Products">
+			<ul>
+				<li><a href="#" onClick="document.getElementById(`the product details`).removeAttribute(`hidden`)" >Product name</a></li>
+				<li><a href="#" onClick="document.getElementById(`the product details`).removeAttribute(`hidden`)" >Product name</a></li>
+			</ul>
+			<div style="text-align: right" >
+				<p>a generic text</p>
+				<details id="the product details" hidden>
+					<p>name</p>
+					<p>description</p>
+					<p>price</p>
+					<p>weight</p>
+				</details>
+			</div>
+		</div>
+		<div id="My Account">
+			<p id="the following fields">
+				<span>first name</span>
+				<span>last name</span>
+				<span>address</span>
+			</p>
+			<button onClick="document.getElementById(`a form`).removeAttribute(`hidden`)" >Edit</button>
+			<div id="a form" hidden>
+				<div>
+					<input>first name</input>
+					<input>last name</input>
+					<input>address</input>
+				</div>
+				<button onClick="g_SaveTheDataAndRedirectTheBrowserToTheMyAccountPage()" >Save</button>
+				<button onClick="location.href = `My Account.htm`" >Cancel</button>
+			</div>
+		</div>
+	</menu>
+</main>
+
+<script type="module">
+import React from "https://esm.sh/react"
+
+function l_SaveTheData() {
+	const l_co = document.createElement("a")
+	l_co.href = URL.createObjectURL(new Blob(document.getElementById("a form").firstElementChild.querySelectorAll("input")))
+	l_co.download = ""
+	l_co.click()
+}
+window.g_SaveTheDataAndRedirectTheBrowserToTheMyAccountPage = function() {
+	l_SaveTheData()
+	location.href = "My Account.htm"
+}
+</script>

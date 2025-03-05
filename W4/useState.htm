@@ -1,0 +1,24 @@
+<script type="module">
+import React from "https://esm.sh/react"
+import ReactDOM from "https://esm.sh/react-dom/client"
+
+function ReactCalculator() {
+	const [l_c, l_cSetL_c] = React.useState()
+	return React.createElement("div", null,
+		React.createElement("input", { readOnly: true, className: "form-control" }),
+		...Array.from({ length: 10 }, (_, digit) => React.createElement("button", { className: "btn", onClick: l_cSetL_c }, digit)),
+		React.createElement("button", { className: "btn", onClick: l_cSetL_c }, "+"),
+		React.createElement("button", { className: "btn", onClick: l_cSetL_c }, "-"),
+		React.createElement("button", { className: "btn", onClick: l_cSetL_c }, "*"),
+		React.createElement("button", { className: "btn", onClick: l_cSetL_c }, "/"),
+		React.createElement("button", { className: "btn", onClick: l_cSetL_c }, "="))
+}
+for (let l_nPlace = 1; l_nPlace <= 2; ++l_nPlace) {
+	for (let l_nComponent = 1; l_nComponent <= 2; ++l_nComponent) {
+		const l_oCalculator = document.createElement("div")
+		document.documentElement.appendChild(l_oCalculator)
+		ReactDOM.createRoot(l_oCalculator).render(React.createElement(ReactCalculator))
+	}
+}
+</script>
+<link rel="stylesheet" href="https://esm.sh/bootstrap@latest/dist/css/bootstrap.css"/>

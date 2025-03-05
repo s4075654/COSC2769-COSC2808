@@ -1,0 +1,18 @@
+<script type="module">
+import React from "https://esm.sh/react"
+import ReactDOM from "https://esm.sh/react-dom/client"
+
+function AReactComponentThatDisplaysA({ a_nTheInitialState = 0 }) {
+	const l_ca = Array.of(React.useRef(null), React.useRef(null))
+	return React.createElement("div", null, 
+		React.createElement("div", { ref: l_ca.at(0) }, a_nTheInitialState),
+		React.createElement("div", null,
+			React.createElement("button", { onClick: () => ++l_ca.at(0).current.innerHTML }, "+"),
+			React.createElement("button", { onClick: () => --l_ca.at(0).current.innerHTML }, "-")),
+		React.createElement("input", { type: "number", ref: l_ca.at(-1) }),
+		React.createElement("button", { onClick: () => l_ca.at(0).current.innerHTML = l_ca.at(-1).current.value }, "Copy")
+	)
+}
+
+ReactDOM.createRoot(document.documentElement).render(React.createElement(AReactComponentThatDisplaysA))
+</script>

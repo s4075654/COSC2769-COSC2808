@@ -1,0 +1,16 @@
+{
+  "lockfileVersion": 1,
+  "workspaces": {
+    "": {
+      "dependencies": {
+        "graphql": "^16.10.0",
+        "graphql-http": "^1.22.4",
+      },
+    },
+  },
+  "packages": {
+    "graphql": ["graphql@16.10.0", "", {}, "sha512-AjqGKbDGUFRKIRCP9tCKiIGHyriz2oHEbPIbEtcSLSs4YjReZOIPQQWek4+6hjw62H9QShXHyaGivGiYVLeYFQ=="],
+
+    "graphql-http": ["graphql-http@1.22.4", "", { "peerDependencies": { "graphql": ">=0.11 <=16" } }, "sha512-OC3ucK988teMf+Ak/O+ZJ0N2ukcgrEurypp8ePyJFWq83VzwRAmHxxr+XxrMpxO/FIwI4a7m/Fzv3tWGJv0wPA=="],
+  }
+}

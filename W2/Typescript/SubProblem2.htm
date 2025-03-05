@@ -1,0 +1,17 @@
+<script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+<script type="text/babel">
+class AStructureForProducts {
+	id: number;
+	name: string;
+	price: number;
+	status: boolean
+}
+
+const g_coSomeProducts = [
+	{ id: NaN, name: "", price: NaN, status: false },
+	{ id: NaN, name: "", price: NaN, status: false }
+]
+
+g_coSomeProducts.at(0).id = NaN
+g_coSomeProducts.at(-1).id = NaN
+</script>

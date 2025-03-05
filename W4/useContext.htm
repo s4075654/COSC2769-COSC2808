@@ -1,0 +1,33 @@
+<script type="module">
+import React from "https://esm.sh/react"
+import ReactDOM from "https://esm.sh/react-dom/client"
+
+class GrandParentComponent extends React.Component {
+	static m_u
+	static ColorContext = {
+		color: GrandParentComponent.m_u,
+		backgroundColor: GrandParentComponent.m_u
+	}
+	static m_o = React.createContext()
+	render() {
+		return React.createElement(GrandParentComponent.m_o.Provider, { value: GrandParentComponent.ColorContext },
+			React.createElement(ParentComponent, null),
+			React.createElement("p", { style: GrandParentComponent.ColorContext }, "some text"))
+	}
+}
+function ParentComponent() {
+	return React.createElement("div", null,
+		React.createElement(ChildComponent, null),
+		React.createElement("p", { style: React.useContext(GrandParentComponent.m_o) }, "some text"))
+}
+function ChildComponent() {
+	return React.createElement("div", null,
+		React.createElement(GrandChildComponent, null),
+		React.createElement("p", { style: React.useContext(GrandParentComponent.m_o) }, "some text"))
+}
+function GrandChildComponent() {
+	return React.createElement("p", { style: React.useContext(GrandParentComponent.m_o) }, "some text")
+}
+
+ReactDOM.createRoot(document.documentElement).render(React.createElement(GrandParentComponent))
+</script>

@@ -1,0 +1,21 @@
+<script type="module">
+import React from "https://esm.sh/react"
+import ReactDOM from "https://esm.sh/react-dom/client"
+
+const g_aArray = Array.of(
+	Array.of("ID", 1, 2, 3),
+	Array.of("Name", "Alice", "Bob", "Carol"),
+	Array.of("Major", "Information Technology", "Software Engineering", "Computer Science"),
+	Array.of("GPA", 3.2, 3.6, 2.8)
+)
+
+function ATableOf(a_aStudents) {
+	return React.createElement("table", null,
+		a_aStudents.map(a_aStudent =>
+		React.createElement("tr", null, a_aStudent.map(a_o =>
+		React.createElement("td", null, a_o)))))
+}
+
+ReactDOM.createRoot(document.documentElement).render(ATableOf(g_aArray.at(0).map((_,
+a_nRow) => g_aArray.map(a_oColumn => a_oColumn.at(a_nRow)))))
+</script>

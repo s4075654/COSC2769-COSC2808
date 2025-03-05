@@ -1,0 +1,14 @@
+<input onkeypress="g_sendMessagesToAllOtherUsersInTheSameRoom(event)" ></input>
+
+<script>
+function g_sendMessagesToAllOtherUsersInTheSameRoom(a_o) {
+	if (a_o.key === "Enter") {
+		g_o.send(document.querySelector("input").value)
+	}
+}
+
+const g_o = new WebSocket("ws://localhost:3000?room=" + prompt("Enter one of the available rooms:"))
+g_o.onmessage = function(a_o) {
+	alert(a_o.data)
+}
+</script>

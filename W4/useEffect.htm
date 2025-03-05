@@ -1,0 +1,16 @@
+<script type="module">
+import React from "https://esm.sh/react"
+import ReactDOM from "https://esm.sh/react-dom/client"
+
+function CountDown(a_oProps) {
+	const [l_cn, l_cSetL_cn] = React.useState(a_oProps.m_nAnInitial)
+	React.useEffect(() => setInterval(function() {
+		l_cSetL_cn(function(l_cn) {
+			alert(l_cn)
+			return (l_cn === 0) ? l_cn : l_cn - 1
+		})
+	}, 1000), [])
+}
+ReactDOM.createRoot(document.documentElement).render(React.createElement(CountDown,
+{ m_nAnInitial: NaN }))
+</script>

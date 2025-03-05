@@ -1,0 +1,112 @@
+<main>
+	<menu>
+		<div id="Home">
+			<p>a generic text</p>
+		</div>
+		<div id="Products">
+			<ul>
+				<li quantity><a href="#" onClick="document.getElementById(`the product details`).removeAttribute(`hidden`)" >Product name</a></li>
+				<li quantity><a href="#" onClick="document.getElementById(`the product details`).removeAttribute(`hidden`)" >Product name</a></li>
+			</ul>
+			<div style="text-align: right" >
+				<p>a generic text</p>
+				<details id="the product details" hidden>
+					<p>name</p>
+					<p>description</p>
+					<p>price</p>
+					<p>weight</p>
+				</details>
+			</div>
+		</div>
+		<div id="My Account">
+			<p id="the following fields">
+				<span>first name</span>
+				<span>last name</span>
+				<span>address</span>
+			</p>
+			<button onClick="document.getElementById(`a form`).removeAttribute(`hidden`)" >Edit</button>
+			<div id="a form" hidden>
+				<div>
+					<input>first name</input>
+					<input>last name</input>
+					<input>address</input>
+				</div>
+				<button onClick="g_SaveTheDataAndRedirectTheBrowserToTheMyAccountPage()" >Save</button>
+				<button onClick="location.href = `My Account.htm`" >Cancel</button>
+			</div>
+		</div>
+	</menu>
+</main>
+
+<script type="module">
+import React from "https://esm.sh/react"
+import { createStore } from "https://esm.sh/redux"
+import { useDispatch, Provider } from "https://esm.sh/react-redux"
+import { HashRouter, Routes, Route } from "https://esm.sh/react-router-dom"
+import ReactDOM from "https://esm.sh/react-dom/client"
+
+function l_SaveTheData() {
+	const l_co = document.createElement("a")
+	l_co.href = URL.createObjectURL(new Blob(document.getElementById("a form").firstElementChild.querySelectorAll("input")))
+	l_co.download = ""
+	l_co.click()
+}
+window.g_SaveTheDataAndRedirectTheBrowserToTheMyAccountPage = function() {
+	l_SaveTheData()
+	location.href = "My Account.htm"
+}
+
+function getProducts() {
+	return Array.from(document.getElementById("Products").firstElementChild.childNodes).map(a_o => a_o.attributes)
+}
+
+const l_coAReduxStore = createStore(function(a_a = Array.of(), a_o) {
+	switch (a_o.type) {
+		case "store them in a Redux store":
+			return a_o.m_oThem
+		case "increase":
+			return a_a.filter(a_o => a_o !== undefined).map(a_o => a_o.getNamedItem("quantity").value = a_o.getNamedItem("quantity").value + 1)
+		case "decrease the quantity of each product":
+			return a_a.filter(a_o => a_o !== undefined).map(a_o => a_o.getNamedItem("quantity").value = a_o.getNamedItem("quantity").value - 1)
+	}
+})
+
+const l_coAllProducts = getProducts()
+
+function Products() {
+	const l_co = useDispatch()
+	React.useEffect(() => l_co({ type: "store them in a Redux store", m_oThem: l_coAllProducts }), [])
+	return React.createElement(HashRouter, null,
+		React.createElement(Routes, null,
+			React.createElement(Route, { path: "/<Product>", element: React.createElement(Product) })))
+}
+ReactDOM.createRoot(document.getElementById("Products")).render(React.createElement(Provider,
+{ store: l_coAReduxStore }, React.createElement(Products)))
+
+document.getElementById("Products").firstElementChild.childNodes.forEach(function(a_o)
+{
+	a_o.addEventListener("click", () => alert(l_coAReduxStore.getState()))
+})
+
+function Product() {
+	return React.createElement("div", { id: "two buttons" },
+		React.createElement("button", { onClick: updateProduct }, "+"),
+		React.createElement("button", { onClick: updateProduct }, "-"),
+		React.createElement("button", { onClick: l_AllowsTheUpdatedDataToBeSentToTheServer }, "Save"))
+}
+
+function updateProduct() {
+	if (l_coAReduxStore.getState()
+		.filter(a_o => a_o !== undefined)
+		.every(a_o => a_o.getNamedItem("quantity").value < 0)) return
+	l_coAReduxStore.dispatch({ type: "increase" })
+}
+
+function l_AllowsTheUpdatedDataToBeSentToTheServer() {
+	fetch("http://localhost:8080", {
+		method: "POST",
+		mode: "no-cors",
+		body: JSON.stringify(l_coAReduxStore.getState())
+	})
+}
+</script>

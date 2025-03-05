@@ -1,0 +1,6 @@
+<script>
+g_aAnArrayOfStudentObjects = [{id: 's123', name: 'Alice', GPA: 3.4}, {id: 's456', name: 'Bob', GPA: 2.8}, {id: 's789', name: 'Carol', GPA: 3.7}]
+g_aAnArrayOfStudentObjects.map(a_oStudent => a_oStudent.name)
+g_aAnArrayOfStudentObjects.filter(a_oStudent => a_oStudent.GPA >= 3.0)
+g_aAnArrayOfStudentObjects.reduce((a_nTheAverageGpaOfAllStudents, a_oStudent) => a_nTheAverageGpaOfAllStudents + a_oStudent.GPA / g_aAnArrayOfStudentObjects.length, 0)
+</script>
