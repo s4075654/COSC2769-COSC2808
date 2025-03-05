@@ -1,2 +1,0 @@
-// ANewOne.ts
-fetch("http://localhost:58888/products", { method: "GET" }).then((a_o) => a_o.json()).then((a_o) => alert(a_o));
