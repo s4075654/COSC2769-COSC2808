@@ -1,0 +1,37 @@
+<script type="module">
+import React from "https://esm.sh/react"
+import ReactDOM from "https://esm.sh/react-dom/client"
+
+function App3() {
+	const [l_coTheLearningResultTable, l_cSetL_CoTheLearningResultTable] = React.useState(new Map(Array.of(Array.of("Full Stack Development", 2), Array.of("Algorithms", 3), Array.of("Database Applications", 4))))
+	const [l_cnTheAverageScore, l_cSetL_CnTheAverageScore] = React.useState(Array.from(l_coTheLearningResultTable.values()).reduce((a_nCurrentScores, a_nCurrentScore) => a_nCurrentScores + a_nCurrentScore, 0) / l_coTheLearningResultTable.size)
+	return React.createElement("div", null,
+		React.createElement("table", null,
+			React.createElement("thead", null,
+				React.createElement("tr", null,
+					React.createElement("th", null, "Course name"),
+					React.createElement("th", null, "Score"),
+					React.createElement("th"))),
+			React.createElement("tbody", null, Array.from(l_coTheLearningResultTable).map(([a_sCourse, a_nScore]) =>
+				React.createElement("tr", null,
+					React.createElement("td", null, a_sCourse),
+					React.createElement("td", null, a_nScore),
+					React.createElement("button", { onClick: () => l_cSetL_CoTheLearningResultTable(function(a_oTheLearningResultTable) {
+						const l_coTheLearningResult = new Map(l_coTheLearningResultTable)
+						l_coTheLearningResult.delete(a_sCourse)
+						return l_coTheLearningResult
+					}) }, "Delete"))))),
+		React.createElement("p", null, "Average Score: " + l_cnTheAverageScore),
+		React.createElement("input", { id: "courseName" }),
+		React.createElement("input", { id: "courseScore" }),
+		React.createElement("button", { onClick: function() {
+			l_cSetL_CoTheLearningResultTable(function() {
+				const l_coTheLearningResult = new Map(l_coTheLearningResultTable)
+				l_coTheLearningResult.set(document.getElementById(`courseName`).value, document.getElementById(`courseScore`).value)
+				l_cSetL_CnTheAverageScore(Array.from(l_coTheLearningResult.values()).reduce((a_nCurrentScores, a_nCurrentScore) => a_nCurrentScores + Number(a_nCurrentScore), 0) / l_coTheLearningResult.size)
+				return l_coTheLearningResult
+			})
+		} }, "Add"))
+}
+ReactDOM.createRoot(document.documentElement).render(React.createElement(App3))
+</script>

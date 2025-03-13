@@ -1,0 +1,12 @@
+<link href="style.css" >
+<script src="script.js" ></script>
+
+<form>
+	<input></input>
+	<button type="button" onclick="fetch(`https://api.genderize.io/?name=` + document.querySelector(`input`).value)
+				.then(a_TheGenderOfTheEnteredName => a_TheGenderOfTheEnteredName.json())
+				.then(function(a_TheGenderResult) {
+					if (a_TheGenderResult.gender === `male`) document.documentElement.insertAdjacentHTML(`afterbegin`, `<h2 style='background-color: blue' >` + a_TheGenderResult.gender + `</h2>`)
+					else document.documentElement.insertAdjacentHTML(`afterbegin`, `<h2 style='background-color: pink'>` + a_TheGenderResult.gender + `</h2>`)
+				})" >Check</button>
+</form>
