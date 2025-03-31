@@ -1,5 +1,4 @@
-import { createHandler } from "graphql-http/lib/use/fetch"
-import { GraphQLSchema, GraphQLObjectType, GraphQLID, GraphQLString, GraphQLFloat, GraphQLList } from "graphql"
+const g_coGraphQl = require("graphql")
 
 const students = [
 	{ id: 1, name: "Alice", major: "IT", GPA: 3.3 },
@@ -13,26 +12,26 @@ const courses = [
   { name: "Capstone Project", credits: 24 },
 ];
 
-const g_coStudents = new GraphQLObjectType({
+const g_coStudents = new g_coGraphQl.GraphQLObjectType({
 	name: "students",
 	fields: {
-		id: { type: GraphQLID },
-		name: { type: GraphQLString },
-		major: { type: GraphQLString },
-		GPA: { type: GraphQLFloat }
+		id: { type: g_coGraphQl.GraphQLID },
+		name: { type: g_coGraphQl.GraphQLString },
+		major: { type: g_coGraphQl.GraphQLString },
+		GPA: { type: g_coGraphQl.GraphQLFloat }
 	}
 })
 
 Bun.serve({
-	fetch: createHandler({
-		schema: new GraphQLSchema({
-			query: new GraphQLObjectType({
+	fetch: require("graphql-http/lib/use/fetch").createHandler({
+		schema: new g_coGraphQl.GraphQLSchema({
+			query: new g_coGraphQl.GraphQLObjectType({
 				name: "courses",
 				fields: {
 		       			courses: {
-						type: new GraphQLList(g_coStudents),
+						type: new g_coGraphQl.GraphQLList(g_coStudents),
 						args: {
-							name: { type: GraphQLString }
+							name: { type: g_coGraphQl.GraphQLString }
 						},
 						resolve() {
 							return students

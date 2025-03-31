@@ -1,6 +1,4 @@
-import express from "express"
-
-const g_coAnExpressApp = express()
+const g_coAnExpressApp = require("express")()
 
 g_coAnExpressApp.use("/", function(a_o, _, a_) {
 	console.log(a_o.get("User-Agent"))

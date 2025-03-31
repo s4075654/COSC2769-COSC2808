@@ -1,6 +1,4 @@
-import express from "express"
-
-const g_coAnExpressApp = express()
+const g_coAnExpressApp = require("express")()
 
 g_coAnExpressApp.get("/products", (_, a_o) => a_o.json("some products"))
 
